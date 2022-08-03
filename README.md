@@ -2,6 +2,10 @@
 
 ## Installation
 
+Requires Adobe After Effects (or simply the `aerender` binary, with some extra configuration)
+
+> An Adobe license is **not** required for render-only use of `.aep` projects
+
 Requires [Node.js version 16+](https://nodejs.org)
 
 [PnPM is recommended](https://pnpm.io) but npm will work
