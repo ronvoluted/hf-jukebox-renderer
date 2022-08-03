@@ -4,3 +4,6 @@ Adobe After Effects Auto-Save
 
 ae-renders/*
 jobs/*
+
+!ae-renders/.gitkeep
+!jobs/.gitkeep
