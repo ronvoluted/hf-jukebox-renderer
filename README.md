@@ -1,4 +1,4 @@
-# Hugging Face Jukebox Job Generator 🤗
+# Hugging Face Jukebox Renderer and Job Generator 🤗
 
 ## Installation
 
