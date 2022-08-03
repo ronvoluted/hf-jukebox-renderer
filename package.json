@@ -1,0 +1,15 @@
+{
+  "name": "hf-jukebox-renderer",
+  "version": "1.0.0",
+  "description": "Programatically render After Effects projects for Hugging Face Jukebox by Arthur Zucker",
+  "scripts": {
+    "render": "nexrender-cli --file"
+  },
+  "keywords": [],
+  "author": "ronvoluted",
+  "dependencies": {
+    "@nexrender/action-copy": "^1.38.0",
+    "@nexrender/action-encode": "^1.38.0",
+    "@nexrender/cli": "^1.39.4"
+  }
+}
