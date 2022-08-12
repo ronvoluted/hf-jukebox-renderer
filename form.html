@@ -33,12 +33,14 @@
         color: var(--text);
       }
 
-      select, input, textarea, button {
+      select,
+      input,
+      textarea,
+      button {
         padding: 0.5rem 1rem;
         box-sizing: border-box;
         border: 1px solid hsl(0 0% 80%);
         border-radius: 0.375rem;
-        
       }
 
       form {
@@ -52,7 +54,10 @@
         gap: 1rem 0;
       }
 
-      label, input, textarea, button {
+      label,
+      input,
+      textarea,
+      button {
         width: 100%;
       }
 
@@ -95,12 +100,7 @@
         <form action="newjob" method="POST" label="inputs">
           <label>
             Submitted by
-            <input
-              name="user"
-              type="text"
-              required
-              placeholder="@art_zucker or Arthur Zucker"
-            />
+            <input name="user" type="text" required placeholder="@art_zucker or Arthur Zucker" />
           </label>
           <label>
             Artist prompt
@@ -121,12 +121,7 @@
           </label>
           <label>
             Path to local working directory
-            <input
-              name="workDir"
-              type="text"
-              required
-              placeholder="Users/<user>/hf-jukebox-renderer"
-            />
+            <input name="workDir" type="text" required placeholder="Users/<user>/hf-jukebox-renderer" />
           </label>
           <div class="columns">
             <label>
@@ -171,38 +166,39 @@
     }) => {
       const job = {
         template: {
-          "src": `file:///${workDir}/${templateDir}/${projectFile}`,
-          composition: "Main",
+          src: `file:///${workDir}/${templateDir}/${projectFile}`,
+          composition: 'Main',
         },
         actions: {
           postrender: [
             {
-              module: "@nexrender/action-copy",
-              output: `/${workDir}/${rendersDir}/${user}.mov`,
+              module: '@nexrender/action-encode',
+              preset: 'mp4',
+              output: `/${workDir}/${rendersDir}/${user}.mp4`,
             },
           ],
         },
         assets: [
           {
             src: `file:///${workDir}/${templateDir}/${audioFile}`,
-            type: "audio",
-            layerName: "sample.wav",
+            type: 'audio',
+            layerName: 'sample.wav',
           },
           {
             src: `file:///${workDir}/${templateDir}/${backgroundFile}`,
-            type: "audio",
-            layerName: "background.jpg",
+            type: 'audio',
+            layerName: 'background.jpg',
           },
           {
-            type: "data",
-            layerName: "Prompt",
-            property: "Source Text",
+            type: 'data',
+            layerName: 'Prompt',
+            property: 'Source Text',
             value: `Prompted by ${user}\n${artist}, ${genre}`,
           },
           {
-            type: "data",
-            layerName: "Lyrics",
-            property: "Source Text",
+            type: 'data',
+            layerName: 'Lyrics',
+            property: 'Source Text',
             value: lyrics,
           },
         ],
@@ -213,7 +209,7 @@
 
     const saveInputs = (inputs) => {
       localStorage.setItem('inputs', JSON.stringify(inputs));
-    }
+    };
 
     const loadInputs = () => {
       const inputsString = localStorage.getItem('inputs');
@@ -226,14 +222,14 @@
       for (const [key, value] of Object.entries(inputs)) {
         form.querySelector(`[name=${key}]`).value = value;
       }
-    }
+    };
 
-    const inputsForm = document.querySelector("form");
-    const inputsBUtton = document.querySelector("form button");
+    const inputsForm = document.querySelector('form');
+    const inputsBUtton = document.querySelector('form button');
 
     loadInputs();
 
-    inputsForm.addEventListener("submit", async (event) => {
+    inputsForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       try {
@@ -243,8 +239,10 @@
           inputs[key] = value;
         }
 
-        const anchor = document.createElement("a");
-        const blob = new Blob([createJobContents(inputs)], { type: "text/plain" });
+        const anchor = document.createElement('a');
+        const blob = new Blob([createJobContents(inputs)], {
+          type: 'text/plain',
+        });
         anchor.href = URL.createObjectURL(blob);
         anchor.download = `${inputs.user.toLowerCase().replace(/@|\s/g, '')}.json`;
         anchor.click();
